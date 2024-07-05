@@ -67,7 +67,15 @@ function LinkedList() {
         const newNode = createNode();
         newNode.value = value;
         list.splice(index, 0, newNode);
-
+        if (list.length > 1) {
+            // is there an Tail Node to my left?
+                // if so, make next = list.length - 1;
+            // is there a node to my right?
+                // point me at node to right
+                // right node tail node? (Y/N)
+                    // Y: TailNode.next = null
+                    // N: Node.next++
+        }
     };
 
     const removeAt = (index) => {
