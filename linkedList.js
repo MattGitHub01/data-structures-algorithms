@@ -1,19 +1,30 @@
-function LinkedList() {
-    this.list = [];
+function createNode(value, next) {
+    value = null,
+    next = null
+    return { value, next }
 }
 
-const newList = LinkedList();
-
-function Node(value, nextNode) {
-    this.value = null,
-    this.nextNode = null,
+function LinkedList() {
+    let list = [];
 
     this.append(value) = () => {
-        const newNode = new NewNode(value);
-        newList.push(newNode);
+        const newNode = createNode();
+        newNode.value = value;
+        list.push(newNode);
+        if (list[list.length - 2] !== undefined) {
+            list[list.length - 2].next = list.length - 1;
+        }
     },
     this.prepend(value) = () => {
-        const newNode = new Node(value);
-        newList.unshift(newNode);
+        const newNode = createNode();
+        list.unshift(newNode);
+    }
+    this.size() = () => {
+        console.log(list.length)
     }
 }
+
+const test = createNode();
+test.value = 'x';
+test.next = 'y';
+console.log(test)
