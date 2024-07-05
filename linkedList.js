@@ -68,23 +68,38 @@ function LinkedList() {
         newNode.value = value;
         list.splice(index, 0, newNode);
         if (list.length > 1) {
-            // is there an Tail Node to my left?
-                // if so, make next = list.length - 1;
-            // is there a node to my right?
-                // point me at node to right
-                // right node tail node? (Y/N)
-                    // Y: TailNode.next = null
-                    // N: Node.next++
+            if (index == (list.length - 1)) {
+                list[list.length - 2].next = index;
+            }
+            if (index < list.length - 1) {
+                newNode.next = index + 1;
+                if (list[index + 1].next !== null) {
+                    let counter = index;
+                    while (counter < (list.length - 2)){
+                        list[counter + 1].next++;
+                        counter++;
+                    }
+                }
+            }
         }
     };
 
     const removeAt = (index) => {
+        if (list.length > 1) {
+            if (index == list.length - 1) {
+                list[index - 1].next = null;
+            }
+            if (index < (list.length - 2)) {
+                let counterTwo = index;
+                while(counterTwo < (list.length - 2)) {
+                    counterTwo++;
+                    list[counterTwo].next--;
 
+                }
+            }
+        }
+    list.splice(index, 1);
     };
     return { list, append, prepend, size, head, tail, at, pop, contains, find, tostring, insertAt, removeAt }
 }
 
-const test = createNode();
-test.value = 'x';
-test.next = 'y';
-console.log(test)
