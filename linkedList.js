@@ -7,61 +7,73 @@ function createNode(value, next) {
 function LinkedList() {
     let list = [];
 
-    this.append = (value) => {
+    const append = (value) => {
         const newNode = createNode();
         newNode.value = value;
         list.push(newNode);
         if (list.length > 1) {
             list[list.length - 2].next = list.length - 1;
         }
-    },
+    };
 
-    this.prepend = (value) => {
+    const prepend = (value) => {
         const newNode = createNode();
         newNode.value = value;
         list.unshift(newNode);
         if (list.length > 1) {
             list[0].next = 1;
         }
-    },
+    };
 
-    this.size = () => {
+    const size = () => {
         console.log(list.length);
-    },
+    };
 
-    this.head = () => {
+    const head = () => {
         console.log(list[0]);
-    },
+    };
 
-    this.tail() = () => {
+    const tail = () => {
         console.log(list[list.length - 1]);
-    },
+    };
 
-    this.at = (index) => {
+    const at = (index) => {
         console.log(list[index]);
-    },
+    };
 
-    this.pop = () => {
+    const pop = () => {
         list.pop();
-    },
+    };
 
-    this.contains = (value) => {
+    const contains = (value) => {
         console.log(list.some((node) => {
             let check = node.value;
             return check === value
     }));
-    },
+    };
 
-    this.find = (value) => {
+    const find = (value) => {
         console.log(list.findIndex((node) => {
             let check = node.value;
             return check === value
     }));
-    },
+    };
 
-    this.toString = () => {
-        
-    }
+    const tostring = () => {
+        console.log(JSON.stringify(list));
+    };
+
+    const insertAt = (value, index) => {
+        const newNode = createNode();
+        newNode.value = value;
+        list.splice(index, 0, newNode);
+
+    };
+
+    const removeAt = (index) => {
+
+    };
+    return { list, append, prepend, size, head, tail, at, pop, contains, find, tostring, insertAt, removeAt }
 }
 
 const test = createNode();
