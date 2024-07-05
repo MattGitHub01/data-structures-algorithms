@@ -7,7 +7,7 @@ function createNode(value, next) {
 function LinkedList() {
     let list = [];
 
-    this.append(value) = () => {
+    this.append = (value) => {
         const newNode = createNode();
         newNode.value = value;
         list.push(newNode);
@@ -16,7 +16,7 @@ function LinkedList() {
         }
     }
 
-    this.prepend(value) = () => {
+    this.prepend = (value) => {
         const newNode = createNode();
         newNode.value = value;
         list.unshift(newNode);
@@ -25,11 +25,11 @@ function LinkedList() {
         }
     }
 
-    this.size() = () => {
+    this.size = () => {
         console.log(list.length);
     }
 
-    this.head() = () => {
+    this.head = () => {
         console.log(list[0]);
     }
 
@@ -37,7 +37,29 @@ function LinkedList() {
         console.log(list[list.length - 1]);
     }
 
-    this.at(index) = () => {
+    this.at = (index) => {
+        console.log(list[index]);
+    }
+
+    this.pop = () => {
+        list.pop();
+    }
+
+    this.contains = (value) => {
+        console.log(list.some((node) => {
+            let check = node.value;
+            return check === value
+    }));
+    }
+
+    this.find = (value) => {
+        console.log(list.findIndex((node) => {
+            let check = node.value;
+            return check === value
+    }));
+    }
+
+    this.toString = () => {
         
     }
 }
