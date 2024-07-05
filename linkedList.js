@@ -14,7 +14,7 @@ function LinkedList() {
         if (list.length > 1) {
             list[list.length - 2].next = list.length - 1;
         }
-    }
+    },
 
     this.prepend = (value) => {
         const newNode = createNode();
@@ -23,41 +23,41 @@ function LinkedList() {
         if (list.length > 1) {
             list[0].next = 1;
         }
-    }
+    },
 
     this.size = () => {
         console.log(list.length);
-    }
+    },
 
     this.head = () => {
         console.log(list[0]);
-    }
+    },
 
     this.tail() = () => {
         console.log(list[list.length - 1]);
-    }
+    },
 
     this.at = (index) => {
         console.log(list[index]);
-    }
+    },
 
     this.pop = () => {
         list.pop();
-    }
+    },
 
     this.contains = (value) => {
         console.log(list.some((node) => {
             let check = node.value;
             return check === value
     }));
-    }
+    },
 
     this.find = (value) => {
         console.log(list.findIndex((node) => {
             let check = node.value;
             return check === value
     }));
-    }
+    },
 
     this.toString = () => {
         
