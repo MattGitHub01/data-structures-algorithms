@@ -102,4 +102,3 @@ function LinkedList() {
     };
     return { list, append, prepend, size, head, tail, at, pop, contains, find, tostring, insertAt, removeAt }
 }
-
