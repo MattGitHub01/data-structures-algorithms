@@ -11,16 +11,34 @@ function LinkedList() {
         const newNode = createNode();
         newNode.value = value;
         list.push(newNode);
-        if (list[list.length - 2] !== undefined) {
+        if (list.length > 1) {
             list[list.length - 2].next = list.length - 1;
         }
-    },
+    }
+
     this.prepend(value) = () => {
         const newNode = createNode();
+        newNode.value = value;
         list.unshift(newNode);
+        if (list.length > 1) {
+            list[0].next = 1;
+        }
     }
+
     this.size() = () => {
-        console.log(list.length)
+        console.log(list.length);
+    }
+
+    this.head() = () => {
+        console.log(list[0]);
+    }
+
+    this.tail() = () => {
+        console.log(list[list.length - 1]);
+    }
+
+    this.at(index) = () => {
+        
     }
 }
 
