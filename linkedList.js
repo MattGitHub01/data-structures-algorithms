@@ -83,6 +83,9 @@ function linkedList() {
             }
             containNode = containNode.next;
         }
+        if (containNode.value === value) {
+            containVal = true;
+        }
         return containVal
     };
 
@@ -157,28 +160,53 @@ function linkedList() {
 const listOne = linkedList();
 
 
-listOne.prepend('testPrepend1')
+listOne.append('a');
 
-listOne.prepend('testPrepend2')
+listOne.append('b');
 
-listOne.append('testAppend1')
+listOne.append('c');
 
-listOne.append('testAppend2')
+listOne.append('d');
 
-listOne.prepend('testPrepend3')
+listOne.append('e');
 
-console.log(listOne.toString());
+console.log(listOne.contains('a'));
 
-console.log(listOne.pop());
+console.log(listOne.contains('b'));
+
+console.log(listOne.contains('c'));
+
+console.log(listOne.contains('d'));
+
+console.log(listOne.contains('e'));
+
+console.log(listOne.at(5))
 
 /*
-console.log(listOne.contains());
+NOT WORKING/UNTESTED:
+
 
 console.log(listOne.find());
 
-
+console.log(listOne.toString());
 
 console.log(listOne.insertAt());
 
 console.log(listOne.removeAt(2));
+
+WORKING:
+listOne.append('testAppend2')
+
+listOne.prepend('testPrepend3')
+
+console.log(listOne.head());
+
+console.log(listOne.tail());
+
+console.log(listOne.size());
+
+console.log(listOne.at());
+
+console.log(listOne.pop());
+
 */
