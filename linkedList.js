@@ -19,6 +19,7 @@ function linkedList() {
             tailNode.next = node;
         }
         tailNode = node;
+        return node
     };
 
     const prepend = (value) => {
@@ -30,6 +31,7 @@ function linkedList() {
             tailNode = node;
         }
         length++;
+        return node
     };
 
     const size = () => {
@@ -125,11 +127,13 @@ function linkedList() {
 
     const insertAt = (value, index) => {
         if (index === length) {
-            append()
+            let newTail = append();
+            newTail.value = value;
             return
         }
         if (index === 1) {
-            prepend()
+            let newHead = prepend();
+            newHead.value = value;
             return
         }
         let node = createNode(value);
@@ -192,10 +196,21 @@ listOne.append('e');
 
 console.log(listOne.toString());
 
+console.log(listOne.head());
 
-//listOne.insertAt('test', 3);
+console.log(listOne.tail());
+
+console.log(listOne.size());
+
+listOne.insertAt('test', 2);
 
 console.log(listOne.toString());
+
+console.log(listOne.head());
+
+console.log(listOne.tail());
+
+console.log(listOne.size());
 
 
 /*
