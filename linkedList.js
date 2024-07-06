@@ -55,8 +55,6 @@ function linkedList() {
                 index--;
             }
             return atCheck
-        } else {
-            return `Error: Position does not exist`
         }
     };
 
@@ -109,21 +107,13 @@ function linkedList() {
     };
 
     const toString = function() {
-        let list = [];
-        let strNode = headNode;
-        if (typeof strNode.next === undefined) {
-            return `Error: no saved nodes`
+        let arr = [];
+        for (i = 0; i < length; i++) {
+            let currNode = at(i);
+            arr.push(currNode);
         }
-        if (strNode.next == null) {
-            list.push(strNode);
-            return JSON.stringify(list)
-        }
-        while (strNode.next !== null) {
-            list.push(strNode);
-            strNode = strNode.next;
-        }
-        return JSON.stringify(list[0])
-    };
+        return JSON.stringify(arr[1]);
+    }
 
     const insertAt = function(value, index) {
         if (index === length) {
@@ -145,19 +135,24 @@ function linkedList() {
     }
 
     const removeAt = function(index) {
-        prevN = at(index - 1);
-        removeNode = at(index);
-        nextN = at(index + 1);
-        prevN.next = node;
-        node.next = nextN;
+        let prevN = at(index - 1);
+        let nextN = at(index + 1);
+        if (index === 1) {
+            headNode = nextN;
+            length--;
+        }
+        if (index === length) {
+            prevN.next = null;
+            tailNode = prevN;
+            length--;
+        }
+        prevN.next = nextN;
     };
     return { append, prepend, size, head, tail, at, pop, contains, find, toString, insertAt, removeAt }
 }
 
 // Testing
 const listOne = linkedList();
-
-
 
 
 
@@ -187,7 +182,7 @@ console.log(listOne.tail());
 
 console.log(listOne.size());*/
 
-listOne.insert2('test', 3);
+listOne.removeAt(2);
 
 console.log(listOne.toString());
 /*
