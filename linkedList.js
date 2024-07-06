@@ -109,7 +109,7 @@ function linkedList() {
     const toString = () => {
         let list = [];
         let strNode = headNode;
-        if (list = []) {
+        if (typeof strNode.next === undefined) {
             return `Error: no saved nodes`
         }
         if (strNode.next == null) {
@@ -170,7 +170,7 @@ const listOne = linkedList();
 
 
 
-console.log(listOne.toString());
+
 
 listOne.append('a');
 
@@ -180,7 +180,7 @@ listOne.append('b');
 
 
 
-listOne.prepend('c');
+listOne.append('c');
 
 
 
@@ -188,19 +188,25 @@ listOne.append('d');
 
 
 
-listOne.prepend('e');
+listOne.append('e');
 
+console.log(listOne.toString());
+
+
+//listOne.insertAt('test', 3);
+
+console.log(listOne.toString());
 
 
 /*
 NOT WORKING/UNTESTED:
 
 
-console.log(listOne.insertAt());
-
 console.log(listOne.removeAt(2));
 
 WORKING:
+console.log(listOne.toString());
+
 console.log(find.toString);
 
 console.log(listOne.contains('e'));
