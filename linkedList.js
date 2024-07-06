@@ -9,8 +9,9 @@ function linkedList() {
     let tailNode = null;
     let length = 0;
 
-    const append = (value) => {
-        let node = createNode(value);
+    const append = function (value) {
+        let node = createNode();
+        node.value = value;
         length++;
         if (headNode === null) {
             headNode = node;
@@ -43,13 +44,16 @@ function linkedList() {
     };
 
     const at = (index) => {
-        if (index <= length) {
+        if (index <= length && index > 0) {
             let atCheck = headNode;
+            index--;
             while (index > 0) {
                 atCheck = atCheck.next;
                 index--;
             }
             return atCheck
+        } else {
+            return `Error: Position does not exist`
         }
     };
 
@@ -134,16 +138,46 @@ function linkedList() {
         let nodeCount = headNode;
         let beforeNode = null;
         let removeNum = index;
-        while (insertNum >= 0) {
-            if (insertNum === 2) {
+        while (removeNum >= 0) {
+            if (removeNum === 2) {
                 beforeNode = nodeCount;
             }
-            if (insertNum === 0) {
+            if (removeNum === 0) {
                 beforeNode.next = nodeCount;
                 return
             }
             removeNum--;
         }
     };
-    return { list, append, prepend, size, head, tail, at, pop, contains, find, toString, insertAt, removeAt }
+    return { append, prepend, size, head, tail, at, pop, contains, find, toString, insertAt, removeAt }
 }
+
+// Testing
+const listOne = linkedList();
+
+
+listOne.prepend('testPrepend1')
+
+listOne.append('testAppend1')
+
+listOne.prepend('testPrepend2')
+
+console.log(listOne.size());
+
+console.log(listOne.head());
+
+console.log(listOne.tail());
+
+console.log(listOne.at(1));
+
+console.log(listOne.pop());
+
+console.log(listOne.contains());
+
+console.log(listOne.find());
+
+console.log(listOne.toString());
+
+console.log(listOne.insertAt());
+
+console.log(listOne.removeAt(2));
