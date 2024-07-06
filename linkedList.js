@@ -6,45 +6,60 @@ function createNode(value, next) {
 
 function linkedList() {
     let headNode = null;
-    let prevNode = null;
+    let tailNode = null;
     let length = 0;
 
     const append = (value) => {
-        let node = createNode();
-        node.value = value;
+        let node = createNode(value);
         length++;
         if (headNode === null) {
             headNode = node;
         } else {
-            prevNode.next = node;
+            tailNode.next = node;
         }
-        prevNode = node;
-
+        tailNode = node;
     };
 
     const prepend = (value) => {
-        const node = createNode();
-        node.value = value;
-        list.unshift(node);
-        if (list.length > 1) {
-            list[0].next = 1;
+        const node = createNode(value);
+        headNode = node;
+        if (tailNode === null) {
+            tailNode = node;
         }
+        length++;
     };
 
     const size = () => {
-        console.log(length);
+        return length
     };
 
     const head = () => {
-        console.log(list[0]);
+        return headNode
     };
 
     const tail = () => {
-        console.log(list[list.length - 1]);
+        if (headNode !== null) {
+            let tailCheck = headNode;
+            while (tailCheck.next !== null) {
+                tailCheck = tailCheck.next;
+            }
+            return tailCheck
+        } else {
+            return null
+        }
     };
 
     const at = (index) => {
-        console.log(list[index]);
+        if (index <= length) {
+            let atCheck = headNode;
+            while (index > 0 && atCheck.next !== null) {
+                atCheck = atCheck.next;
+                index--;
+            }
+            return atCheck
+        } else {
+            return null
+        }
     };
 
     const pop = () => {
