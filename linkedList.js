@@ -140,84 +140,15 @@ function linkedList() {
         if (index === 1) {
             headNode = nextN;
             length--;
+            return
         }
         if (index === length) {
             prevN.next = null;
             tailNode = prevN;
             length--;
+            return
         }
         prevN.next = nextN;
     };
     return { append, prepend, size, head, tail, at, pop, contains, find, toString, insertAt, removeAt }
 }
-
-// Testing
-const listOne = linkedList();
-
-
-
-listOne.append('a');
-
-
-
-listOne.append('b');
-
-
-
-listOne.append('c');
-
-
-
-listOne.append('d');
-
-
-
-listOne.append('e');
-
-console.log(listOne.toString());
-/*
-console.log(listOne.head());
-
-console.log(listOne.tail());
-
-console.log(listOne.size());*/
-
-listOne.removeAt(2);
-
-console.log(listOne.toString());
-/*
-console.log(listOne.head());
-
-console.log(listOne.tail());
-
-console.log(listOne.size());*/
-
-
-/*
-NOT WORKING/UNTESTED:
-
-
-console.log(listOne.removeAt(2));
-
-WORKING:
-console.log(listOne.toString());
-
-console.log(find.toString);
-
-console.log(listOne.contains('e'));
-
-listOne.append('testAppend2')
-
-listOne.prepend('testPrepend3')
-
-console.log(listOne.head());
-
-console.log(listOne.tail());
-
-console.log(listOne.size());
-
-console.log(listOne.at());
-
-console.log(listOne.pop());
-
-*/
