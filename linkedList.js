@@ -58,21 +58,21 @@ function linkedList() {
         }
     };
 
-    const pop = () => {
-        let popLength = length;
-        let popNode = headNode;
-        let newTail = null;
-        while (popNode.next !== null) {
-            if (popLength == 2) {
-                newTail = popNode;
+    const pop = function() {
+        if (length > 0) {
+            let popCount = length - 1;
+            let popNode = headNode;
+            popCount--;
+            while (popCount > 0) {
+                popNode = popNode.next;
+                popCount--;
             }
-            popNode = popNode.next;
-            popLength--;
+            popNode.next = null;
+            tailNode = popNode;
+            length--;
+            return popNode
         }
-        if (popNode.next === null) {
-            tailNode = newTail;
-        }
-    };
+    }
 
     const contains = (value) => {
         let containNode = headNode;
@@ -159,26 +159,26 @@ const listOne = linkedList();
 
 listOne.prepend('testPrepend1')
 
-listOne.append('testAppend1')
-
 listOne.prepend('testPrepend2')
 
-console.log(listOne.size());
+listOne.append('testAppend1')
 
-console.log(listOne.head());
+listOne.append('testAppend2')
 
-console.log(listOne.tail());
+listOne.prepend('testPrepend3')
 
-console.log(listOne.at(1));
+console.log(listOne.toString());
 
 console.log(listOne.pop());
 
+/*
 console.log(listOne.contains());
 
 console.log(listOne.find());
 
-console.log(listOne.toString());
+
 
 console.log(listOne.insertAt());
 
 console.log(listOne.removeAt(2));
+*/
