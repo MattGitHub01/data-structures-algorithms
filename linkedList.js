@@ -22,7 +22,8 @@ function linkedList() {
     };
 
     const prepend = (value) => {
-        const node = createNode(value);
+        const node = createNode();
+        node.value = value;
         node.next = headNode;
         headNode = node;
         if (tailNode === null) {
