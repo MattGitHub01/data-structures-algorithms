@@ -109,12 +109,18 @@ function linkedList() {
     const toString = () => {
         let list = [];
         let strNode = headNode;
+        if (list = []) {
+            return `Error: no saved nodes`
+        }
+        if (strNode.next == null) {
+            list.push(strNode);
+            return JSON.stringify(list)
+        }
         while (strNode.next !== null) {
-            let curNodeStr = JSON.stringify(strNode);
-            list.push(curNodeStr);
+            list.push(strNode);
             strNode = strNode.next;
         }
-        return JSON.stringify(list)
+        return JSON.stringify(list[0])
     };
 
     const insertAt = (value, index) => {
@@ -163,39 +169,40 @@ function linkedList() {
 const listOne = linkedList();
 
 
+
+console.log(listOne.toString());
+
 listOne.append('a');
+
+
 
 listOne.append('b');
 
-listOne.append('c');
+
+
+listOne.prepend('c');
+
+
 
 listOne.append('d');
 
-listOne.append('e');
 
-console.log(listOne.find('a'));
 
-console.log(listOne.find('b'));
+listOne.prepend('e');
 
-console.log(listOne.find('c'));
 
-console.log(listOne.find('d'));
-
-console.log(listOne.find('e'));
 
 /*
 NOT WORKING/UNTESTED:
 
-
-
-
-console.log(listOne.toString());
 
 console.log(listOne.insertAt());
 
 console.log(listOne.removeAt(2));
 
 WORKING:
+console.log(find.toString);
+
 console.log(listOne.contains('e'));
 
 listOne.append('testAppend2')
