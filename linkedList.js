@@ -9,7 +9,7 @@ function linkedList() {
     let tailNode = null;
     let length = 0;
 
-    const append = function (value) {
+    const append = function(value) {
         let node = createNode();
         node.value = value;
         length++;
@@ -22,7 +22,7 @@ function linkedList() {
         return node
     };
 
-    const prepend = (value) => {
+    const prepend = function(value) {
         const node = createNode();
         node.value = value;
         node.next = headNode;
@@ -34,19 +34,19 @@ function linkedList() {
         return node
     };
 
-    const size = () => {
+    const size = function() {
         return length
     };
 
-    const head = () => {
+    const head = function() {
         return headNode
     };
 
-    const tail = () => {
+    const tail = function() {
         return tailNode
     };
 
-    const at = (index) => {
+    const at = function(index) {
         if (index <= length && index > 0) {
             let atCheck = headNode;
             index--;
@@ -76,7 +76,7 @@ function linkedList() {
         }
     }
 
-    const contains = (value) => {
+    const contains = function(value) {
         let containNode = headNode;
         let containVal = false;
         while (containNode.next !== null) {
@@ -91,7 +91,7 @@ function linkedList() {
         return containVal
     };
 
-    const find = (value) => {
+    const find = function(value) {
         let findNode = headNode;
         let findVal = 1;
         let returnVal = null;
@@ -108,7 +108,7 @@ function linkedList() {
         return returnVal
     };
 
-    const toString = () => {
+    const toString = function() {
         let list = [];
         let strNode = headNode;
         if (typeof strNode.next === undefined) {
@@ -125,7 +125,7 @@ function linkedList() {
         return JSON.stringify(list[0])
     };
 
-    const insertAt = (value, index) => {
+    const insert2 = function(value, index) {
         if (index === length) {
             let newTail = append();
             newTail.value = value;
@@ -136,22 +136,51 @@ function linkedList() {
             newHead.value = value;
             return
         }
-        let node = createNode(value);
-        let countNode = headNode;
-        let insertNum = index;
-        while (insertNum >= 0) {
-            if (insertNum === 2) {
-                countNode.next = node;
-            }
-            if (insertNum === 1) {
-                node.next = countNode;
-                return
-            }
-            insertNum--;
+        let node = createNode();
+        node.value = value;
+        prevN = at(index);
+        nextN = at(index + 1);
+        prevN.next = node;
+        node.next = nextN;
+    }
+
+    const insertAt = function(value, index) {
+        if (index === length) {
+            let newTail = append();
+            newTail.value = value;
+            return
         }
+        if (index === 1) {
+            let newHead = prepend();
+            newHead.value = value;
+            return
+        }
+        index = index - 1;
+        let prevNodeCount = index - 2;
+        let prevNode = null;
+        let nextNodeCount = index;
+        let nextNode = null;
+        let node = createNode();
+        node.value = value;
+        let countNode = headNode;
+        while (index >= 0) {
+            console.log('TEST');
+            console.log(countNode);
+            if (index === prevNodeCount) {
+                prevNode = countNode;
+            }
+            if (index === nextNodeCount) {
+                nextNode = countNode;
+                console.log('wtf');
+                console.log(nextNode);
+            }
+            countNode = countNode.next;
+            index--;
+        }
+        prevNode.next = node;
     };
 
-    const removeAt = (index) => {
+    const removeAt = function(index) {
         let nodeCount = headNode;
         let beforeNode = null;
         let removeNum = index;
@@ -166,7 +195,7 @@ function linkedList() {
             removeNum--;
         }
     };
-    return { append, prepend, size, head, tail, at, pop, contains, find, toString, insertAt, removeAt }
+    return { append, prepend, size, head, tail, at, pop, contains, find, toString, insert2, removeAt }
 }
 
 // Testing
@@ -195,22 +224,22 @@ listOne.append('d');
 listOne.append('e');
 
 console.log(listOne.toString());
-
+/*
 console.log(listOne.head());
 
 console.log(listOne.tail());
 
-console.log(listOne.size());
+console.log(listOne.size());*/
 
-listOne.insertAt('test', 2);
+listOne.insert2('test', 3);
 
 console.log(listOne.toString());
-
+/*
 console.log(listOne.head());
 
 console.log(listOne.tail());
 
-console.log(listOne.size());
+console.log(listOne.size());*/
 
 
 /*
