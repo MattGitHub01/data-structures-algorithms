@@ -4,29 +4,35 @@ function createNode(value, next) {
     return { value, next }
 }
 
-function LinkedList() {
-    let list = [];
+function linkedList() {
+    let headNode = null;
+    let prevNode = null;
+    let length = 0;
 
     const append = (value) => {
-        const newNode = createNode();
-        newNode.value = value;
-        list.push(newNode);
-        if (list.length > 1) {
-            list[list.length - 2].next = list.length - 1;
+        let node = createNode();
+        node.value = value;
+        length++;
+        if (headNode === null) {
+            headNode = node;
+        } else {
+            prevNode.next = node;
         }
+        prevNode = node;
+
     };
 
     const prepend = (value) => {
-        const newNode = createNode();
-        newNode.value = value;
-        list.unshift(newNode);
+        const node = createNode();
+        node.value = value;
+        list.unshift(node);
         if (list.length > 1) {
             list[0].next = 1;
         }
     };
 
     const size = () => {
-        console.log(list.length);
+        console.log(length);
     };
 
     const head = () => {
@@ -64,15 +70,15 @@ function LinkedList() {
     };
 
     const insertAt = (value, index) => {
-        const newNode = createNode();
-        newNode.value = value;
-        list.splice(index, 0, newNode);
+        const node = createNode();
+        node.value = value;
+        list.splice(index, 0, node);
         if (list.length > 1) {
             if (index == (list.length - 1)) {
                 list[list.length - 2].next = index;
             }
             if (index < list.length - 1) {
-                newNode.next = index + 1;
+                node.next = index + 1;
                 if (list[index + 1].next !== null) {
                     let counter = index;
                     while (counter < (list.length - 2)){
