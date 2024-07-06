@@ -91,7 +91,7 @@ function linkedList() {
 
     const find = (value) => {
         let findNode = headNode;
-        let findVal = 0;
+        let findVal = 1;
         let returnVal = null;
         while (findNode.next !== null) {
             if (findNode.value === value) {
@@ -99,6 +99,9 @@ function linkedList() {
             }
             findVal++;
             findNode = findNode.next;
+        }
+        if (findNode.value === value) {
+                returnVal = findVal;
         }
         return returnVal
     };
@@ -170,23 +173,21 @@ listOne.append('d');
 
 listOne.append('e');
 
-console.log(listOne.contains('a'));
+console.log(listOne.find('a'));
 
-console.log(listOne.contains('b'));
+console.log(listOne.find('b'));
 
-console.log(listOne.contains('c'));
+console.log(listOne.find('c'));
 
-console.log(listOne.contains('d'));
+console.log(listOne.find('d'));
 
-console.log(listOne.contains('e'));
-
-console.log(listOne.at(5))
+console.log(listOne.find('e'));
 
 /*
 NOT WORKING/UNTESTED:
 
 
-console.log(listOne.find());
+
 
 console.log(listOne.toString());
 
@@ -195,6 +196,8 @@ console.log(listOne.insertAt());
 console.log(listOne.removeAt(2));
 
 WORKING:
+console.log(listOne.contains('e'));
+
 listOne.append('testAppend2')
 
 listOne.prepend('testPrepend3')
