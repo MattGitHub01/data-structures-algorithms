@@ -125,25 +125,6 @@ function linkedList() {
         return JSON.stringify(list[0])
     };
 
-    const insert2 = function(value, index) {
-        if (index === length) {
-            let newTail = append();
-            newTail.value = value;
-            return
-        }
-        if (index === 1) {
-            let newHead = prepend();
-            newHead.value = value;
-            return
-        }
-        let node = createNode();
-        node.value = value;
-        prevN = at(index);
-        nextN = at(index + 1);
-        prevN.next = node;
-        node.next = nextN;
-    }
-
     const insertAt = function(value, index) {
         if (index === length) {
             let newTail = append();
@@ -155,47 +136,22 @@ function linkedList() {
             newHead.value = value;
             return
         }
-        index = index - 1;
-        let prevNodeCount = index - 2;
-        let prevNode = null;
-        let nextNodeCount = index;
-        let nextNode = null;
         let node = createNode();
         node.value = value;
-        let countNode = headNode;
-        while (index >= 0) {
-            console.log('TEST');
-            console.log(countNode);
-            if (index === prevNodeCount) {
-                prevNode = countNode;
-            }
-            if (index === nextNodeCount) {
-                nextNode = countNode;
-                console.log('wtf');
-                console.log(nextNode);
-            }
-            countNode = countNode.next;
-            index--;
-        }
+        prevNode = at(index);
+        nextNode = at(index + 1);
         prevNode.next = node;
-    };
+        node.next = nextNode;
+    }
 
     const removeAt = function(index) {
-        let nodeCount = headNode;
-        let beforeNode = null;
-        let removeNum = index;
-        while (removeNum >= 0) {
-            if (removeNum === 2) {
-                beforeNode = nodeCount;
-            }
-            if (removeNum === 0) {
-                beforeNode.next = nodeCount;
-                return
-            }
-            removeNum--;
-        }
+        prevN = at(index - 1);
+        removeNode = at(index);
+        nextN = at(index + 1);
+        prevN.next = node;
+        node.next = nextN;
     };
-    return { append, prepend, size, head, tail, at, pop, contains, find, toString, insert2, removeAt }
+    return { append, prepend, size, head, tail, at, pop, contains, find, toString, insertAt, removeAt }
 }
 
 // Testing
