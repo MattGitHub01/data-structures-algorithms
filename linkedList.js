@@ -22,6 +22,7 @@ function linkedList() {
 
     const prepend = (value) => {
         const node = createNode(value);
+        node.next = headNode;
         headNode = node;
         if (tailNode === null) {
             tailNode = node;
@@ -38,88 +39,111 @@ function linkedList() {
     };
 
     const tail = () => {
-        if (headNode !== null) {
-            let tailCheck = headNode;
-            while (tailCheck.next !== null) {
-                tailCheck = tailCheck.next;
-            }
-            return tailCheck
-        } else {
-            return null
-        }
+        return tailNode
     };
 
     const at = (index) => {
         if (index <= length) {
             let atCheck = headNode;
-            while (index > 0 && atCheck.next !== null) {
+            while (index > 0) {
                 atCheck = atCheck.next;
                 index--;
             }
             return atCheck
-        } else {
-            return null
         }
     };
 
     const pop = () => {
-        list.pop();
+        let popLength = length;
+        let popNode = headNode;
+        let newTail = null;
+        while (popNode.next !== null) {
+            if (popLength == 2) {
+                newTail = popNode;
+            }
+            popNode = popNode.next;
+            popLength--;
+        }
+        if (popNode.next === null) {
+            tailNode = newTail;
+        }
     };
 
     const contains = (value) => {
-        console.log(list.some((node) => {
-            let check = node.value;
-            return check === value
-    }));
+        let containNode = headNode;
+        let containVal = false;
+        while (containNode.next !== null) {
+            if (containNode.value === value) {
+                containVal = true;
+            }
+            containNode = containNode.next;
+        }
+        return containVal
     };
 
     const find = (value) => {
-        console.log(list.findIndex((node) => {
-            let check = node.value;
-            return check === value
-    }));
+        let findNode = headNode;
+        let findVal = 0;
+        let returnVal = null;
+        while (findNode.next !== null) {
+            if (findNode.value === value) {
+                returnVal = findVal;
+            }
+            findVal++;
+            findNode = findNode.next;
+        }
+        return returnVal
     };
 
-    const tostring = () => {
-        console.log(JSON.stringify(list));
+    const toString = () => {
+        let list = [];
+        let strNode = headNode;
+        while (strNode.next !== null) {
+            let curNodeStr = JSON.stringify(strNode);
+            list.push(curNodeStr);
+            strNode = strNode.next;
+        }
+        return JSON.stringify(list)
     };
 
     const insertAt = (value, index) => {
-        const node = createNode();
-        node.value = value;
-        list.splice(index, 0, node);
-        if (list.length > 1) {
-            if (index == (list.length - 1)) {
-                list[list.length - 2].next = index;
+        if (index === length) {
+            append()
+            return
+        }
+        if (index === 1) {
+            prepend()
+            return
+        }
+        let node = createNode(value);
+        let countNode = headNode;
+        let insertNum = index;
+        while (insertNum >= 0) {
+            if (insertNum === 2) {
+                countNode.next = node;
             }
-            if (index < list.length - 1) {
-                node.next = index + 1;
-                if (list[index + 1].next !== null) {
-                    let counter = index;
-                    while (counter < (list.length - 2)){
-                        list[counter + 1].next++;
-                        counter++;
-                    }
-                }
+            if (insertNum === 1) {
+                node.next = countNode;
+                return
             }
+            insertNum--;
         }
     };
 
     const removeAt = (index) => {
-        if (list.length > 1) {
-            if (index == list.length - 1) {
-                list[index - 1].next = null;
+        let nodeCount = headNode;
+        let beforeNode = null;
+        let removeNum = index;
+        while (insertNum >= 0) {
+            if (insertNum === 2) {
+                beforeNode = nodeCount;
             }
-            if (index < (list.length - 2)) {
-                let counterTwo = index;
-                while(counterTwo < (list.length - 2)) {
-                    counterTwo++;
-                    list[counterTwo].next--;
-
-                }
+            if (insertNum === 0) {
+                beforeNode.next = nodeCount;
+                return
             }
+            removeNum--;
         }
-    list.splice(index, 1);
     };
-    return { list, append, prepend, size, head, tail, at, pop, contains, find, tostring, insertAt, removeAt }
+    return { list, append, prepend, size, head, tail, at, pop, contains, find, toString, insertAt, removeAt }
 }
