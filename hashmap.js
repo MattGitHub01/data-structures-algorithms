@@ -23,7 +23,7 @@ function hashMap() {
         let oldMap = entries();
         initSize = initSize * 2;
         hashMap = new Array(initSize);
-        for (let bucket in oldMap) {
+        for (let bucket of oldMap) {
             hashMap.push(bucket);
         }
     }
@@ -33,7 +33,7 @@ function hashMap() {
         let index = hash(key);
         let newInpt = [index, value];
         let bList = linkedList.func();
-        for (let bucket in hashMap) {
+        for (let bucket of hashMap) {
             if (bucket[0] === index && (bucket[1] !== bList && value !== bucket[1])) {
                 bList.append(value);
                 bList.append(bucket[1]);
@@ -54,7 +54,7 @@ function hashMap() {
         if (index < 0 || index >= arrLength) {
             throw new Error("Trying to access index out of bound");
           }
-        for (let bucket in hashMap) {
+        for (let bucket of hashMap) {
             if (bucket[0] === index) {
                 return bucket[1]
             }
@@ -68,7 +68,7 @@ function hashMap() {
         if (index < 0 || index >= arrLength) {
             throw new Error("Trying to access index out of bound");
           }
-        for (let bucket in hashMap) {
+        for (let bucket of hashMap) {
             if (bucket[0] === index) {
                 return true
             }
@@ -82,7 +82,7 @@ function hashMap() {
         if (index < 0 || index >= arrLength) {
             throw new Error("Trying to access index out of bound");
           }
-        for (let bucket in hashMap) {
+        for (let bucket of hashMap) {
             if (bucket[0] === index) {
                 hashMap.splice(bucket, 1);
                 arrLength--;
