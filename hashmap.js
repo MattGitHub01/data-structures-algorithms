@@ -51,10 +51,7 @@ function hashMap() {
     // Return value at a key
     const get = function(key) {
         let index = hash(key);
-        if (index < 0 || index >= arrLength) {
-            throw new Error("Trying to access index out of bound");
-          }
-        for (let bucket in hashMap) {
+        for (let bucket of hashMap) {
             if (bucket[0] === index) {
                 return bucket[1]
             }
@@ -76,9 +73,11 @@ function hashMap() {
     // Remove a bucket from bucket array
     const remove = function(key) {
         let index = hash(key);
+        let count = -1;
         for (let bucket of hashMap) {
+            count++;
             if (bucket[0] === index) {
-                hashMap.splice(bucket, 1);
+                hashMap.splice(count, 1)
                 arrLength--;
                 return true
             }
@@ -152,15 +151,16 @@ test.set('kite', 'pink')
 test.set('lion', 'golden')
 
 //TESTING / NOT WORKING
-//console.log(test.get('golden'))
-//console.log(test.remove('golden'))
+
 console.log(test.entries())
 console.log(test.length())
-console.log(test.clear())
+console.log(test.remove('grape'))
 console.log(test.entries())
 console.log(test.length())
 
 //TESTED: WORKING + .set() above
+// console.log(test.get('hat'))
+// console.log(test.clear())
 // console.log(test.length())
 // console.log(test.entries())
 // console.log(test.values())
