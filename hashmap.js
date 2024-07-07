@@ -1,8 +1,10 @@
 import { linkedList } from './linkedList.js';
 
 function hashMap() {
-    let hashMap = new Array(16).fill(null).map(() => []);
-    const arrLength = 0;
+    let initSize = 16;
+    let hashMap = new Array(initSize).fill(null).map(() => []);
+    let arrLength = 0;
+    let loadFactor = .8;
 
     // Hashing algorithm to create keys
     const hash = function(key) {
@@ -16,6 +18,15 @@ function hashMap() {
         return hashCode
     }
 
+    const resize = function() {
+        let oldMap = entries();
+        initSize = initSize * 2;
+        hashMap = new Array(initSize);
+        for (let bucket in oldMap) {
+            hashMap.push(bucket);
+        }
+    }
+
     // Set key / value pairs
     const set = function(key, value) {
         let index = hash(key);
@@ -24,7 +35,7 @@ function hashMap() {
           }
         let newInpt = [index, value];
         let bList = linkedList();
-        for (bucket in bucketMap) {
+        for (let bucket in bucketMap) {
             if (bucket[0] === index && (bucket[1] !== bList && value !== bucket[1])) {
                 bList.append(value);
                 bList.append(bucket[1]);
@@ -33,6 +44,10 @@ function hashMap() {
         }
         hashMap.push(newInpt);
         arrLength++;
+
+        if (arrLength / hashMap.length > loadFactor) {
+            resize()
+        }
     }
 
     // Return value at a key
@@ -41,7 +56,7 @@ function hashMap() {
         if (index < 0 || index >= buckets.length) {
             throw new Error("Trying to access index out of bound");
           }
-        for (bucket in bucketMap) {
+        for (let bucket in bucketMap) {
             if (bucket[0] === index) {
                 return bucket[1]
             }
@@ -55,7 +70,7 @@ function hashMap() {
         if (index < 0 || index >= buckets.length) {
             throw new Error("Trying to access index out of bound");
           }
-        for (bucket in bucketMap) {
+        for (let bucket in bucketMap) {
             if (bucket[0] === index) {
                 return true
             }
@@ -66,7 +81,10 @@ function hashMap() {
     // Remove a bucket from bucket array
     const remove = function(key) {
         let index = hash(key);
-        for (bucket in bucketMap) {
+        if (index < 0 || index >= buckets.length) {
+            throw new Error("Trying to access index out of bound");
+          }
+        for (let bucket in bucketMap) {
             if (bucket[0] === index) {
                 bucketMap.splice(bucket, 1);
                 arrLength--;
@@ -89,7 +107,7 @@ function hashMap() {
     // Return array of all keys in hash map
     const keys = function() {
         let result = [];
-        for (bucket of bucketMap) {
+        for (let bucket of bucketMap) {
             result.push(bucket[0]);
         }
         return result
@@ -98,14 +116,18 @@ function hashMap() {
     // Return array of values in hash map
     const values = function() {
         let result = [];
-        for (bucket of bucketMap) {
+        for (let bucket of bucketMap) {
             result.push(bucket[1]);
         }
         return result
     }
 
     const entries = function() {
-        return hashMap
+        let entries = [];
+        for (let bucket in hashMap) {
+            entries.push(bucket);
+        }
+        return entries
     }
 
     return { hash, set, get, has, remove, length, clear, keys, values, entries}
