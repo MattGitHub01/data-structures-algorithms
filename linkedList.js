@@ -4,7 +4,7 @@ function createNode(value, next) {
     return { value, next }
 }
 
-function linkedList() {
+export function linkedList() {
     let headNode = null;
     let tailNode = null;
     let length = 0;
