@@ -31,9 +31,6 @@ function hashMap() {
     // Set key / value pairs
     const set = function(key, value) {
         let index = hash(key);
-        if (index < 0 || index >= arrLength) {
-            //throw new Error("Trying to access index out of bound");
-          }
         let newInpt = [index, value];
         let bList = linkedList.func();
         for (let bucket in hashMap) {
@@ -55,7 +52,7 @@ function hashMap() {
     const get = function(key) {
         let index = hash(key);
         if (index < 0 || index >= arrLength) {
-            //throw new Error("Trying to access index out of bound");
+            throw new Error("Trying to access index out of bound");
           }
         for (let bucket in hashMap) {
             if (bucket[0] === index) {
@@ -69,7 +66,7 @@ function hashMap() {
     const has = function(key) {
         let index = hash(key);
         if (index < 0 || index >= arrLength) {
-            //throw new Error("Trying to access index out of bound");
+            throw new Error("Trying to access index out of bound");
           }
         for (let bucket in hashMap) {
             if (bucket[0] === index) {
@@ -83,7 +80,7 @@ function hashMap() {
     const remove = function(key) {
         let index = hash(key);
         if (index < 0 || index >= arrLength) {
-            //throw new Error("Trying to access index out of bound");
+            throw new Error("Trying to access index out of bound");
           }
         for (let bucket in hashMap) {
             if (bucket[0] === index) {
@@ -109,7 +106,10 @@ function hashMap() {
     const keys = function() {
         let result = [];
         for (let bucket of hashMap) {
-            result.push(bucket[0]);
+            let k = bucket[0];
+            if (k !== undefined) {
+                result.push(k);
+            }
         }
         return result
     }
@@ -118,15 +118,21 @@ function hashMap() {
     const values = function() {
         let result = [];
         for (let bucket of hashMap) {
-            result.push(bucket[1]);
+            let val = bucket[1];
+            if (val !== undefined) {
+                result.push(val);
+            }
         }
         return result
     }
 
     const entries = function() {
         let entries = [];
-        for (let bucket in hashMap) {
-            entries.push(bucket);
+        for (let bucket of hashMap) {
+            if (bucket[0] !== undefined) {
+                let entry = [bucket[0], bucket[1]];
+                entries.push(entry);
+            }
         }
         return entries
     }
@@ -152,7 +158,7 @@ test.set('lion', 'golden')
 
 console.log(test.length())
 console.log(test.entries())
-console.log(test.values())
-console.log(test.keys())
+// console.log(test.values())
+// console.log(test.keys())
 
-console.log(test.hash('apple'))
+// console.log(test.hash('apple'))
