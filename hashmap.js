@@ -9,10 +9,11 @@ function hashMap() {
     // Hashing algorithm to create keys
     const hash = function(key) {
         let hashCode = 0;
-        const prime = 83;
+        const prime = 11;
 
         for (let i = 0; i < key.length; i++) {
-            hashCode = prime * hashCode + (prime * 827);
+            hashCode = prime * hashCode + (key.charCodeAt(i) *2);
+            hashCode = hashCode % 16;
         }
         
         return hashCode
@@ -96,7 +97,7 @@ function hashMap() {
 
     // Returns number of buckets
     const length = function() {
-        return size
+        return arrLength
     }
 
     // Delete all entries and reset hashMap
@@ -149,4 +150,9 @@ test.set('jacket', 'blue')
 test.set('kite', 'pink')
 test.set('lion', 'golden')
 
+console.log(test.length())
 console.log(test.entries())
+console.log(test.values())
+console.log(test.keys())
+
+console.log(test.hash('apple'))
