@@ -156,9 +156,14 @@ test.set('jacket', 'blue')
 test.set('kite', 'pink')
 test.set('lion', 'golden')
 
+console.log(test.get('golden'))
+// console.log(test.has())
+// console.log(test.remove())
+// console.log(test.clear())
+
+//TESTED: WORKING + .set() above
 console.log(test.length())
 console.log(test.entries())
-// console.log(test.values())
-// console.log(test.keys())
-
-// console.log(test.hash('apple'))
+console.log(test.values())
+console.log(test.keys())
+console.log(test.hash('kite'))
