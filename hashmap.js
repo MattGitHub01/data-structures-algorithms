@@ -31,15 +31,15 @@ function hashMap() {
     // Set key / value pairs
     const set = function(key, value) {
         let index = hash(key);
-        let newInpt = [index, value];
-        let bList = linkedList.func();
-        for (let bucket in hashMap) {
-            if (bucket[0] === index && (bucket[1] !== bList && value !== bucket[1])) {
-                bList.append(value);
-                bList.append(bucket[1]);
-                bucket[1] = bList;
-            }
-        }
+        // if there is already a bucket with the same key
+            // save old bucket value
+            // replace the old value with a linked list
+            // add the old value first to the linked list
+            // add the new value second to the linked list
+            // DO NOT increase length because there isn't an extra bucket
+
+        let newInpt = [index, value];    
+
         hashMap.push(newInpt);
         arrLength++;
 
