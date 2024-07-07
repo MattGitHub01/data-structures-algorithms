@@ -65,9 +65,6 @@ function hashMap() {
     // Check if key exists in bucket array
     const has = function(key) {
         let index = hash(key);
-        if (index < 0 || index >= arrLength) {
-            throw new Error("Trying to access index out of bound");
-          }
         for (let bucket of hashMap) {
             if (bucket[0] === index) {
                 return true
@@ -79,10 +76,7 @@ function hashMap() {
     // Remove a bucket from bucket array
     const remove = function(key) {
         let index = hash(key);
-        if (index < 0 || index >= arrLength) {
-            throw new Error("Trying to access index out of bound");
-          }
-        for (let bucket in hashMap) {
+        for (let bucket of hashMap) {
             if (bucket[0] === index) {
                 hashMap.splice(bucket, 1);
                 arrLength--;
@@ -100,6 +94,7 @@ function hashMap() {
     // Delete all entries and reset hashMap
     const clear = function() {
         hashMap = new Array(16).fill(null).map(() => []);
+        arrLength = 0;
     }
 
     // Return array of all keys in hash map
@@ -156,14 +151,19 @@ test.set('jacket', 'blue')
 test.set('kite', 'pink')
 test.set('lion', 'golden')
 
-console.log(test.get('golden'))
-// console.log(test.has())
-// console.log(test.remove())
-// console.log(test.clear())
+//TESTING / NOT WORKING
+//console.log(test.get('golden'))
+//console.log(test.remove('golden'))
+console.log(test.entries())
+console.log(test.length())
+console.log(test.clear())
+console.log(test.entries())
+console.log(test.length())
 
 //TESTED: WORKING + .set() above
-console.log(test.length())
-console.log(test.entries())
-console.log(test.values())
-console.log(test.keys())
-console.log(test.hash('kite'))
+// console.log(test.length())
+// console.log(test.entries())
+// console.log(test.values())
+// console.log(test.keys())
+// console.log(test.has('kite'))
+// console.log(test.hash('jacket'))
