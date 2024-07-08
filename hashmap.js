@@ -33,16 +33,19 @@ function hashMap() {
     const set = function(key, value) {
         let index = hash(key);
         let count = 0;
+        let setVal = value;
 
         for (bucket of hashMap) {
+            console.log(bucket);
             if (bucket[0] === index) {
                 hashMap.splice(count, 1);
-                break
+                console.log(hashMap[count]);
+                setVal = list.append(value);
             }
             count++;
         }
 
-        let setNew = [index, list.append(value)];
+        let setNew = [index, setVal];
         hashMap.push(setNew);
         arrLength++;
         if (arrLength / hashMap.length > loadFactor) {
@@ -116,7 +119,13 @@ function hashMap() {
         for (let bucket of hashMap) {
             let val = bucket[1];
             if (val !== undefined) {
-                result.push(val);
+                while (val.next !== null) {
+                    result.push(val);
+                    val = val.next;
+                }
+                if (val.next === null) {
+                    result.push(val)
+                }
             }
         }
         return result
@@ -154,17 +163,23 @@ test.set('lion', 'golden')
 
 //TESTING / NOT WORKING
 
-console.log(test.entries())
-console.log(test.length())
 
+// console.log(test.values())
+console.log(test.entries())
+//console.log(test.get('apple').next.next.next.next.next.next.next.next.next.next.next)
+
+console.log(test.has('testnot')) 
 //TESTED: WORKING + .set() above
-// console.log(test.get('hat'))
 // console.log(test.clear())
 // console.log(test.length())
-// console.log(test.entries())
 // console.log(test.keys())
 
+// console.log(test.hash('lion')) 
+// console.log(test.get('dog'))
+// console.log(test.entries())
+
 // BUGS / NOT WORKING AS INTENDED:
-// console.log(test.values())
+// console.log(test.entries())
+// console.log(test.get('apple').next.next.next.next.next.next.next.next.next.next.next)
 // console.log(test.has('testnot')) 
-// console.log(test.hash('anything')) 
+
