@@ -3,6 +3,7 @@ const linkedList = require('./linkedList.js')
 function hashMap() {
     let initSize = 16;
     let hashMap = new Array(initSize).fill(null).map(() => []);
+    let list = linkedList.func();
     let arrLength = 0;
     let loadFactor = .8;
 
@@ -31,18 +32,27 @@ function hashMap() {
     // Set key / value pairs
     const set = function(key, value) {
         let index = hash(key);
-        // if there is already a bucket with the same key
-            // save old bucket value
-            // replace the old value with a linked list
-            // add the old value first to the linked list
-            // add the new value second to the linked list
-            // DO NOT increase length because there isn't an extra bucket
 
-        let newInpt = [index, value];    
+        //Loop through buckets
+        for (let i = 0; i < arrLength; i++) {
+            // if there is already a bucket with the same key
+            let bucket = hashMap[i];
+            console.log(hashMap[i])
+            if (bucket[0] === index) {
+                list.append(value);
+                hashMap.splice(count, 1);
+                // replace the old value with a linked list
+                bucket[1] = list;
+                // add the old value first to the linked list
+                list.append(oldVal);
+                // add the new value second to the linked list
+                // DO NOT increase length because there isn't an extra bucket
+            }
+        }
 
+        let newInpt = [index, list.append(value)];
         hashMap.push(newInpt);
         arrLength++;
-
         if (arrLength / hashMap.length > loadFactor) {
             resize()
         }
@@ -154,16 +164,15 @@ test.set('lion', 'golden')
 
 console.log(test.entries())
 console.log(test.length())
-console.log(test.remove('grape'))
-console.log(test.entries())
-console.log(test.length())
 
 //TESTED: WORKING + .set() above
 // console.log(test.get('hat'))
 // console.log(test.clear())
 // console.log(test.length())
 // console.log(test.entries())
-// console.log(test.values())
 // console.log(test.keys())
-// console.log(test.has('kite'))
-// console.log(test.hash('jacket'))
+
+// BUGS / NOT WORKING AS INTENDED:
+// console.log(test.values())
+// console.log(test.has('testnot')) 
+// console.log(test.hash('anything')) 
