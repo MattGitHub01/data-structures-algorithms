@@ -32,26 +32,18 @@ function hashMap() {
     // Set key / value pairs
     const set = function(key, value) {
         let index = hash(key);
+        let count = 0;
 
-        //Loop through buckets
-        for (let i = 0; i < arrLength; i++) {
-            // if there is already a bucket with the same key
-            let bucket = hashMap[i];
-            console.log(hashMap[i])
+        for (bucket of hashMap) {
             if (bucket[0] === index) {
-                list.append(value);
                 hashMap.splice(count, 1);
-                // replace the old value with a linked list
-                bucket[1] = list;
-                // add the old value first to the linked list
-                list.append(oldVal);
-                // add the new value second to the linked list
-                // DO NOT increase length because there isn't an extra bucket
+                break
             }
+            count++;
         }
 
-        let newInpt = [index, list.append(value)];
-        hashMap.push(newInpt);
+        let setNew = [index, list.append(value)];
+        hashMap.push(setNew);
         arrLength++;
         if (arrLength / hashMap.length > loadFactor) {
             resize()
